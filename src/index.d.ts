@@ -14,7 +14,7 @@ type ObjAccessor<T> = Accessor<object, T>;
 type Coords = { x: number; y: number; z: number; };
 
 // don't surface these internal props from inner ThreeForceGraph
-type ExcludedInnerProps = 'onLoading' | 'onFinishLoading' | 'onUpdate' | 'onFinishUpdate' | 'tickFrame' | 'd3AlphaTarget' | 'resetCountdown';
+type ExcludedInnerProps = 'onLoading' | 'onFinishLoading' | 'onUpdate' | 'onFinishUpdate' | 'tickFrame';
 
 export interface ForceGraph3DGenericInstance<ChainableInstance>
     extends Omit<ThreeForceGraphGeneric<ChainableInstance>, ExcludedInnerProps> {
@@ -56,6 +56,7 @@ export interface ForceGraph3DGenericInstance<ChainableInstance>
   enableNodeDrag(enable: boolean): ChainableInstance;
   enableNavigationControls(): boolean;
   enableNavigationControls(enable: boolean): ChainableInstance;
+  onRendered(callback?: () => void): ChainableInstance;
 
   // Render control
   pauseAnimation(): ChainableInstance;
@@ -68,6 +69,7 @@ export interface ForceGraph3DGenericInstance<ChainableInstance>
   camera(): Camera;
   renderer(): WebGLRenderer;
   controls(): object;
+  getForceGraph(): object;
 
   // Utility
   graph2ScreenCoords(x: number, y: number, z: number): Coords;

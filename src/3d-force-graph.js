@@ -133,6 +133,7 @@ export default Kapsule({
     onLinkHover: { triggerUpdate: false },
     onBackgroundClick: { triggerUpdate: false },
     onBackgroundRightClick: { triggerUpdate: false },
+    onRendered: { default: () => {}, triggerUpdate: false},
     ...linkedFGProps,
     ...linkedRenderObjsProps
   },
@@ -176,6 +177,7 @@ export default Kapsule({
     renderer: state => state.renderObjs.renderer(), // Expose renderer
     controls: state => state.renderObjs.controls(), // Expose controls
     tbControls: state => state.renderObjs.tbControls(), // To be deprecated
+    getForceGraph: state => state.forceGraph,
     _destructor: function() {
       this.pauseAnimation();
       this.graphData({ nodes: [], links: []});
@@ -339,6 +341,7 @@ export default Kapsule({
             renderer.domElement.classList.remove('grabbable');
           });
         }
+        state.onRendered()
       });
 
     // config renderObjs
